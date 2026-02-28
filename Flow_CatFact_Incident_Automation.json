@@ -1,0 +1,83 @@
+{
+  "name": "Cat Fact Incident Automation",
+  "description": "Flow that runs on incident insert, fetches a cat fact from catfact.ninja API, adds it as a comment, assigns to random ITIL user, and roasts them in work notes",
+  "table": "incident",
+  "run_on": "insert",
+  "active": true,
+  "actions": [
+    {
+      "action": "rest_api",
+      "name": "Get Cat Fact",
+      "description": "Fetch a random cat fact from catfact.ninja",
+      "endpoint": "https://catfact.ninja/fact",
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "output_variables": {
+        "cat_fact": "${response_body.fact}"
+      }
+    },
+    {
+      "action": "script",
+      "name": "Get Priority Modifier",
+      "description": "Get priority-based modifier for the cat fact",
+      "script": "(function() {\n  var priority = fd_data.trigger.current.priority;\n  var modifiers = {\n    '1': 'P1 CRITICAL ALERT',\n    '2': 'P2 HIGH PRIORITY',\n    '3': 'P3 MODERATE',\n    '4': 'P4 LOW',\n    '5': 'P5 PLANNING'\n  };\n  return modifiers[priority] || 'INCIDENT ALERT';\n})();",
+      "output_variables": {
+        "priority_modifier": "script_output"
+      }
+    },
+    {
+      "action": "create_data",
+      "name": "Add Cat Fact Comment",
+      "description": "Add the cat fact as a comment to the incident",
+      "table": "incident",
+      "record_id": "${trigger.current.sys_id}",
+      "data": {
+        "comments": "[${Get Priority Modifier.priority_modifier}] CAT FACT: ${Get Cat Fact.cat_fact}"
+      }
+    },
+    {
+      "action": "script",
+      "name": "Get Random ITIL User",
+      "description": "Query and select a random active ITIL user",
+      "script": "(function() {\n  var users = [];\n  var gr = new GlideRecord('sys_user');\n  gr.addActiveQuery();\n  gr.addQuery('roles', 'CONTAINS', 'itil');\n  gr.query();\n  \n  while (gr.next()) {\n    users.push({\n      sys_id: gr.getUniqueValue(),\n      name: gr.getDisplayValue('name'),\n      user_name: gr.getValue('user_name')\n    });\n  }\n  \n  if (users.length === 0) {\n    return { sys_id: null, name: null };\n  }\n  \n  var randomIndex = Math.floor(Math.random() * users.length);\n  return users[randomIndex];\n})();",
+      "output_variables": {
+        "assigned_user_id": "script_output.sys_id",
+        "assigned_user_name": "script_output.name"
+      }
+    },
+    {
+      "action": "script",
+      "name": "Generate Roast",
+      "description": "Generate a random roast message",
+      "script": "(function() {\n  var roasts = [\n    'Good luck with this one! Your debugging skills are about to be tested harder than a cat\\'s patience at the vet.',\n    'Hope you like puzzles, because this incident is more tangled than a ball of yarn in a kitten\\'s paws.',\n    'Assigned to someone with the luck of a black cat crossing their path. You\\'ll need it!',\n    'This one\\'s yours now! May your troubleshooting be faster than a cat\\'s reflexes when they hear a can opener.',\n    'Congratulations! You\\'ve won the privilege of solving this mystery. It\\'s more confusing than why cats love boxes so much.',\n    'Assigned to you because we believe in second chances... and third chances... and however many it takes you to fix this.',\n    'Hope you\\'re well-rested, because this incident is going to keep you busier than a cat trying to bury a mistake on a marble floor.',\n    'You\\'ve been chosen! Your reward is this delightful ticket that will haunt you like a cat\\'s judgmental stare at 5 AM.',\n    'This incident just got personal. It\\'s now your problem, like a cat bringing you a \\'gift\\' at 3 AM.',\n    'Welcome to the party! This incident is about as welcome as a hairball on a white carpet, but it\\'s yours now!',\n    'Assigned to someone whose troubleshooting skills are legendary... in their own mind. Let\\'s see if reality matches!',\n    'This one\\'s all yours! May the odds be ever in your favor (they won\\'t be, but we like to stay positive).',\n    'Congratulations on your new best friend - this incident! It will follow you around like a cat demanding dinner at 4 PM.',\n    'You\\'ve been selected as the chosen one to resolve this. Don\\'t let it go to your head... or let it destroy your sanity.',\n    'This incident is now your responsibility, like a cat that decided your keyboard is the perfect place to nap during a demo.'\n  ];\n  var randomIndex = Math.floor(Math.random() * roasts.length);\n  return roasts[randomIndex];\n})();",
+      "output_variables": {
+        "roast_message": "script_output"
+      }
+    },
+    {
+      "action": "create_data",
+      "name": "Assign and Add Roast",
+      "description": "Assign incident to random ITIL user and add roast to work notes",
+      "table": "incident",
+      "record_id": "${trigger.current.sys_id}",
+      "condition": "${Get Random ITIL User.assigned_user_id} != null",
+      "data": {
+        "assigned_to": "${Get Random ITIL User.assigned_user_id}",
+        "work_notes": "ASSIGNMENT ROAST for ${Get Random ITIL User.assigned_user_name}: ${Generate Roast.roast_message}"
+      }
+    },
+    {
+      "action": "create_data",
+      "name": "No ITIL User Fallback",
+      "description": "Add work note if no ITIL users found",
+      "table": "incident",
+      "record_id": "${trigger.current.sys_id}",
+      "condition": "${Get Random ITIL User.assigned_user_id} == null",
+      "data": {
+        "work_notes": "No ITIL users found for random assignment. The cat facts remain, but the roast must wait."
+      }
+    }
+  ]
+}
