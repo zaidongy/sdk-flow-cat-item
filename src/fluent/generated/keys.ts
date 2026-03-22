@@ -436,7 +436,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '331115f583933210ceda52e0deaad3ae'
-                        deleted: false
+                        deleted: true
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'rec_price_if_checked'
@@ -478,7 +478,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '3b1115f583933210ceda52e0deaad3b0'
-                        deleted: false
+                        deleted: true
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'price_if_checked'
