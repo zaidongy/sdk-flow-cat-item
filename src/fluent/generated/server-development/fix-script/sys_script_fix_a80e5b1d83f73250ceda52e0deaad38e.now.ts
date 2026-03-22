@@ -7,7 +7,11 @@ Record({
         before: false,
         name: 'Demo Fix Script - Chris Yang',
         record_for_rollback: true,
-        script: '// Demo fix script - this script does not do anything but to test git sync between local, remote, and servicenow instances',
+        script: `// Demo fix script - this script does not do anything but to test git sync between local, remote, and servicenow instances
+
+// hello world
+
+// hi there`,
         unloadable: false,
     },
 })
