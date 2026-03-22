@@ -326,6 +326,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '07e596578327b610ceda52e0deaad332'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_a8a2bd3af1c94ed692124e77a832a787'
+                            element: 'current'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: '0d143390d14d4ecbbe7ce2f963623938'
                         key: {
@@ -341,6 +350,15 @@ declare global {
                         key: {
                             catalog_item: '7bbc1b225ece4d809ba239de2830ae63'
                             topic: '782413a7c3053010069aec4b7d40ddf1'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '0fe596578327b610ceda52e0deaad3d3'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_a8a2bd3af1c94ed692124e77a832a787'
+                            element: 'table_name'
+                            language: 'en'
                         }
                     },
                     {
@@ -412,7 +430,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '331115f583933210ceda52e0deaad3ae'
-                        deleted: true
+                        deleted: false
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'rec_price_if_checked'
@@ -454,7 +472,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '3b1115f583933210ceda52e0deaad3b0'
-                        deleted: true
+                        deleted: false
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'price_if_checked'
@@ -583,6 +601,14 @@ declare global {
                             cat_item: '4b528917c9d94288981476df3854ebc7'
                             variable_set: 'NULL'
                             name: 'description'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '7ae556578327b610ceda52e0deaad37d'
+                        key: {
+                            model: 'a8a2bd3af1c94ed692124e77a832a787'
+                            element: 'current'
                         }
                     },
                     {
@@ -754,6 +780,14 @@ declare global {
                         key: {
                             sc_cat_item: '4b528917c9d94288981476df3854ebc7'
                             sc_catalog: '050d919726cc4448a0fdc38b3bb868a2'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'cbe596578327b610ceda52e0deaad3cc'
+                        key: {
+                            model: 'a8a2bd3af1c94ed692124e77a832a787'
+                            element: 'table_name'
                         }
                     },
                     {

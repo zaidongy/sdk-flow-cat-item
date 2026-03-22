@@ -139,15 +139,17 @@ const userCriteriaDevDepartment = Record({
 export const basicLaptopRequest = CatalogItem({
     $id: Now.ID['basic_catalog_item'],
     name: 'Basic Laptop Request',
-    shortDescription: 'Request a standard laptop for business use',
-    description: 'Use this form to request a standard laptop for business use. Approval from your manager is required.',
+    shortDescription:
+        'Request a standard laptop for business use. Business users should request this, developer should request the Developer Workstation.',
+    description: `<p>Use this form to request a standard laptop for business use. Approval from your manager is required.</p>
+<p>This is the standard workstation</p>`,
     catalogs: [catalogServiceCatalog],
     categories: [categoryHardware],
     variableSets: [{ variableSet: userInfoVarSet, order: 100 }],
     assignedTopics: [topicComputer, topicHardware],
     executionPlan: '523da512c611228900811a37c97c2014',
     notAvailableFor: ['66c1b50e730333009508738234f6a7c9'],
-    version: 4,
+    version: 5,
 })
 
 // ---------------------------
