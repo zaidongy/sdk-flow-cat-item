@@ -106,6 +106,10 @@ declare global {
                         id: 'a3278f1ee2a44041b141ccb86baca089'
                         deleted: true
                     }
+                    a80e5b1d83f73250ceda52e0deaad38e: {
+                        table: 'sys_script_fix'
+                        id: 'a80e5b1d83f73250ceda52e0deaad38e'
+                    }
                     ad3518e12ec0480aaef08c60b19b923e: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: 'ad3518e12ec0480aaef08c60b19b923e'
@@ -328,6 +332,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '07e596578327b610ceda52e0deaad332'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_input_a8a2bd3af1c94ed692124e77a832a787'
                             element: 'current'
@@ -355,6 +360,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '0fe596578327b610ceda52e0deaad3d3'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_input_a8a2bd3af1c94ed692124e77a832a787'
                             element: 'table_name'
@@ -430,7 +436,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '331115f583933210ceda52e0deaad3ae'
-                        deleted: false
+                        deleted: true
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'rec_price_if_checked'
@@ -472,7 +478,7 @@ declare global {
                     {
                         table: 'fx_price'
                         id: '3b1115f583933210ceda52e0deaad3b0'
-                        deleted: false
+                        deleted: true
                         key: {
                             id: '5ab0517583933210ceda52e0deaad381'
                             field: 'price_if_checked'
@@ -606,6 +612,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '7ae556578327b610ceda52e0deaad37d'
+                        deleted: true
                         key: {
                             model: 'a8a2bd3af1c94ed692124e77a832a787'
                             element: 'current'
@@ -785,6 +792,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'cbe596578327b610ceda52e0deaad3cc'
+                        deleted: true
                         key: {
                             model: 'a8a2bd3af1c94ed692124e77a832a787'
                             element: 'table_name'

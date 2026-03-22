@@ -5,7 +5,7 @@ Record({
     table: 'sys_script_fix',
     data: {
         before: false,
-        name: 'Demo Fix',
+        name: 'Demo Fix Script - Chris Yang',
         record_for_rollback: true,
         script: '// Demo fix script - this script does not do anything but to test git sync between local, remote, and servicenow instances',
         unloadable: false,
